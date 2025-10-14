@@ -9,11 +9,11 @@
   const pacientes = ref([])
 
   watch(pacientes, () => { // Vigila cambios
-      localStorage()
+      localStoragePacientes()
   }, { deep: true })
 
-  const localStorage = () => { // Guardar en localStorage
-      localStorage.setItem('pacientes', JSON.stringify(pacientes.value))
+  const localStoragePacientes = () => { // Guardar en localStoragePacientes
+      localStoragePacientes.setItem('pacientes', JSON.stringify(pacientes.value))
   }
 
   onMounted (() => { // Cargar desde localStorage
