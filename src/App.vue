@@ -1,5 +1,5 @@
 <script setup>
-  import { ref, reactive } from 'vue';
+  import { ref, reactive, onMounted, watch } from 'vue';
   import { uid } from 'uid';
 
   import Header from './components/Header.vue';
@@ -7,8 +7,22 @@
   import Pacientes from './components/Pacientes.vue';
 
   const pacientes = ref([])
-  
 
+  watch(pacientes, () => { // Vigila cambios
+      localStorage()
+  }, { deep: true })
+
+  const localStorage = () => { // Guardar en localStorage
+      localStorage.setItem('pacientes', JSON.stringify(pacientes.value))
+  }
+
+  onMounted (() => { // Cargar desde localStorage
+    const pacientesStorage = localStorage.getItem('pacientes')
+    if (pacientesStorage){
+        pacientes.value = JSON.parse(pacientesStorage)
+    }
+  })
+  
   const state = reactive({ 
     id: null,
     mascota: '',
@@ -18,16 +32,35 @@
     sintomas: ''
   })
 
-  const guardarPaciente = () => {
-    pacientes.value.push({ ...state, id: uid() })
-
+  const limpiarFormulario = () => {
     Object.assign(state, {
+      id: null,
       mascota: '',
       propietario: '',
       email: '',
       alta: '',
       sintomas: ''
     })
+  }
+  const guardarPaciente = () => {
+    if (state.id) {
+      const index = pacientes.value.findIndex(p => p.id === state.id)
+      pacientes.value[index] = { ...state }
+      limpiarFormulario()
+      return
+    }else{
+      pacientes.value.push({ ...state, id: uid() })
+      limpiarFormulario()
+    }
+  }
+  
+  const actualizarPaciente = (id) => {
+    const paciente = pacientes.value.filter(p => p.id === id)[0]
+    Object.assign(state, paciente)
+  }
+
+  const eliminarPaciente = (id) => {
+    pacientes.value = pacientes.value.filter(p => p.id !== id)
   }
 
 </script>
@@ -43,6 +76,7 @@
         v-model:alta="state.alta"
         v-model:sintomas="state.sintomas"
         @guardar-paciente="guardarPaciente"
+        :id = "state.id"
       />
 
       <div class="md:w-1/2 lg:w-3/5 md:h-screen overflow-y-scroll">
@@ -63,6 +97,8 @@
             v-for="(paciente, index) in pacientes"
             :key="index"
             :paciente="paciente"
+            @actualizar-paciente="actualizarPaciente(paciente.id)"
+            @eliminar-paciente="eliminarPaciente(paciente.id)"
           />
         </div>
         
