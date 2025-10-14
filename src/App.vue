@@ -79,7 +79,7 @@
         :id = "state.id"
       />
 
-      <div class="md:w-1/2 lg:w-3/5 md:h-screen overflow-y-scroll">
+      <div class="md:w-2/3 lg:w-4/5 overflow-y-auto  md:h-screen">
         <h3 class="text-3xl font-black text-center">Listado de Pacientes</h3>
         <div v-if="pacientes.length === 0" class="mt-5 text-center">
           <p class="text-xl text-gray-800 -mt-5">
