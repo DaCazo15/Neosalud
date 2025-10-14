@@ -1,5 +1,7 @@
 <script setup>
   import { ref, reactive } from 'vue';
+  import { uid } from 'uid';
+
   import Header from './components/Header.vue';
   import Formulario from './components/Formulario.vue';
   import Pacientes from './components/Pacientes.vue';
@@ -8,6 +10,7 @@
   
 
   const state = reactive({ 
+    id: null,
     mascota: '',
     propietario: '',
     email: '',
@@ -16,7 +19,15 @@
   })
 
   const guardarPaciente = () => {
-    pacientes.value.push({ ...state })
+    pacientes.value.push({ ...state, id: uid() })
+
+    Object.assign(state, {
+      mascota: '',
+      propietario: '',
+      email: '',
+      alta: '',
+      sintomas: ''
+    })
   }
 
 </script>

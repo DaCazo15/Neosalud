@@ -9,11 +9,11 @@
 
 <template>
     <div class="mx-5 my-10 bg-white shadow-md px-5 py-10 rounded-xl mb-3 ">
-        <!-- <p class="font-bold mb-3 text-gray-700 uppercase">ID:
+        <p class="font-bold mb-3 text-gray-700 uppercase">ID:
             <span class="font-normal normal-case">
                 {{ paciente.id }}
             </span>
-        </p> -->
+        </p>
 
         <p class="font-bold mb-3 text-gray-700 uppercase">Nombre:
             <span class="font-normal normal-case">

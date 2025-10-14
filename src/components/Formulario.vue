@@ -28,11 +28,18 @@
         if (Object.values(props).includes('')){
             alerta.mensaje = 'Todos los campos son obligatorios';
             alerta.tipo = 'error';
+
+            setTimeout(() => {
+                Object.assign(alerta, { tipo: '', mensaje: '' })
+            }, 3000)
             return
         }else{
             alerta.mensaje = 'Paciente agregado correctamente';
             alerta.tipo = 'success';
             emits('guardar-paciente');
+            setTimeout(() => {
+                Object.assign(alerta, { tipo: '', mensaje: '' })
+            }, 3000)
         }
     }
 
