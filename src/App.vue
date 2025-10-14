@@ -13,7 +13,7 @@
   }, { deep: true })
 
   const localStoragePacientes = () => { // Guardar en localStoragePacientes
-      localStoragePacientes.setItem('pacientes', JSON.stringify(pacientes.value))
+      localStorage.setItem('pacientes', JSON.stringify(pacientes.value))
   }
 
   onMounted (() => { // Cargar desde localStorage
