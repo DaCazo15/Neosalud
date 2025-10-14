@@ -8,7 +8,7 @@
     })
 
     const emits =defineEmits([
-        'update:nombre',
+        'update:mascota',
         'update:propietario',
         'update:email',
         'update:alta',
@@ -17,7 +17,7 @@
     ])
 
     const props = defineProps({
-        nombre:{ type: String, required: true },
+        mascota:{ type: String, required: true },
         propietario:{ type: String, required: true },
         email:{ type: String, required: true },
         alta:{ type: String, required: true },
@@ -68,8 +68,8 @@
                     id="mascota"
                     placeholder="Nombre de la mascota"
                     class="placeholder-gray-400 rounded-md border-2 w-full p-3"
-                    :value="nombre"
-                    @input="$emit('update:nombre', $event.target.value)"
+                    :value="mascota"
+                    @input="$emit('update:mascota', $event.target.value)"
                     >
                 </div>
                 

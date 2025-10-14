@@ -16,7 +16,7 @@
   })
 
   const guardarPaciente = () => {
-    pacientes.value.push({state})
+    pacientes.value.push({ ...state })
   }
 
 </script>
@@ -26,7 +26,7 @@
     <Header />
     <div class="mt-12 md:flex">
       <Formulario 
-        v-model:nombre="state.mascota"
+        v-model:mascota="state.mascota"
         v-model:propietario="state.propietario"
         v-model:email="state.email"
         v-model:alta="state.alta"
@@ -48,8 +48,9 @@
               Pacientes <span class="font-bold text-indigo-600">Registrados</span>
             </p>
           </div>
-          <Pacientes 
-            v-for="paciente in pacientes"
+          <Pacientes
+            v-for="(paciente, index) in pacientes"
+            :key="index"
             :paciente="paciente"
           />
         </div>
